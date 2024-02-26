@@ -9,25 +9,25 @@
 %define		kfname		kquickimageditor
 Summary:	kquick image editor
 Name:		kquickimageeditor
-Version:	0.2.0
+Version:	0.3.0
 Release:	1
 License:	BSD 2 Clause/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/kquickimageeditor/%{name}-%{version}.tar.xz
-# Source0-md5:	f563a679f2d4ac590108dffe3073cbc5
+# Source0-md5:	819eae13205ab0315e94d936904eab87
 URL:		http://www.kde.org/
-BuildRequires:	Qt5Core-devel >= 5.15.10
-BuildRequires:	Qt5Gui-devel >= 5.15.10
-BuildRequires:	Qt5Network-devel >= 5.15.10
-BuildRequires:	Qt5Qml-devel >= 5.15.10
-BuildRequires:	Qt5Quick-devel
+BuildRequires:	Qt6Core-devel >= 5.15.10
+BuildRequires:	Qt6Gui-devel >= 5.15.10
+BuildRequires:	Qt6Network-devel >= 5.15.10
+BuildRequires:	Qt6Qml-devel >= 5.15.10
+BuildRequires:	Qt6Quick-devel
 BuildRequires:	cmake >= 3.20
 BuildRequires:	ninja
-BuildRequires:	qt5-build >= %{qtver}
+BuildRequires:	qt6-build >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	kf5-dirs
+Requires:	kf6-dirs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -53,7 +53,8 @@ Pliki nagłówkowe dla programistów używających %{name}.
 %cmake -B build \
 	-G Ninja \
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+	-DQT_MAJOR_VERSION=6
 %ninja_build -C build
 
 %if %{with tests}
@@ -69,19 +70,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%dir %{_libdir}/qt5/qml/org/kde/kquickimageeditor
-%{_libdir}/qt5/qml/org/kde/kquickimageeditor/BasicResizeHandle.qml
-%{_libdir}/qt5/qml/org/kde/kquickimageeditor/CropBackground.qml
-%{_libdir}/qt5/qml/org/kde/kquickimageeditor/RectangleCutout.qml
-%{_libdir}/qt5/qml/org/kde/kquickimageeditor/SelectionBackground.qml
-%{_libdir}/qt5/qml/org/kde/kquickimageeditor/SelectionHandle.qml
-%{_libdir}/qt5/qml/org/kde/kquickimageeditor/SelectionTool.qml
-%attr(755,root,root) %{_libdir}/qt5/qml/org/kde/kquickimageeditor/libkquickimageeditorplugin.so
-%{_libdir}/qt5/qml/org/kde/kquickimageeditor/plugins.qmltypes
-%{_libdir}/qt5/qml/org/kde/kquickimageeditor/qmldir
-%{_libdir}/qt5/qml/org/kde/kquickimageeditor/qmldir.license
+%dir %{_libdir}/qt6/qml/org/kde/kquickimageeditor
+%{_libdir}/qt6/qml/org/kde/kquickimageeditor/BasicResizeHandle.qml
+%{_libdir}/qt6/qml/org/kde/kquickimageeditor/CropBackground.qml
+%{_libdir}/qt6/qml/org/kde/kquickimageeditor/RectangleCutout.qml
+%{_libdir}/qt6/qml/org/kde/kquickimageeditor/SelectionBackground.qml
+%{_libdir}/qt6/qml/org/kde/kquickimageeditor/SelectionHandle.qml
+%{_libdir}/qt6/qml/org/kde/kquickimageeditor/SelectionTool.qml
+%{_libdir}/qt6/qml/org/kde/kquickimageeditor/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/kquickimageeditor/kquickimageeditorplugin.qmltypes
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/kquickimageeditor/libkquickimageeditorplugin.so
+%{_libdir}/qt6/qml/org/kde/kquickimageeditor/qmldir
 
 %files devel
 %defattr(644,root,root,755)
 %{_libdir}/cmake/KQuickImageEditor
-%{_libdir}/qt5/mkspecs/modules/qt_KQuickImageEditor.pri
+%{_libdir}/qt6/mkspecs/modules/qt_KQuickImageEditor.pri
