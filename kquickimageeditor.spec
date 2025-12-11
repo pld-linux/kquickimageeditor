@@ -9,12 +9,12 @@
 %define		kfname		kquickimageditor
 Summary:	kquick image editor
 Name:		kquickimageeditor
-Version:	0.3.0
+Version:	0.6.0
 Release:	1
 License:	BSD 2 Clause/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/kquickimageeditor/%{name}-%{version}.tar.xz
-# Source0-md5:	819eae13205ab0315e94d936904eab87
+# Source0-md5:	55b77ed06675e2c57f4a2317a998ce75
 URL:		http://www.kde.org/
 BuildRequires:	Qt6Core-devel >= 5.15.10
 BuildRequires:	Qt6Gui-devel >= 5.15.10
@@ -68,21 +68,19 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
-%dir %{_libdir}/qt6/qml/org/kde/kquickimageeditor
-%{_libdir}/qt6/qml/org/kde/kquickimageeditor/BasicResizeHandle.qml
-%{_libdir}/qt6/qml/org/kde/kquickimageeditor/CropBackground.qml
-%{_libdir}/qt6/qml/org/kde/kquickimageeditor/RectangleCutout.qml
-%{_libdir}/qt6/qml/org/kde/kquickimageeditor/SelectionBackground.qml
-%{_libdir}/qt6/qml/org/kde/kquickimageeditor/SelectionHandle.qml
-%{_libdir}/qt6/qml/org/kde/kquickimageeditor/SelectionTool.qml
-%{_libdir}/qt6/qml/org/kde/kquickimageeditor/kde-qmlmodule.version
-%{_libdir}/qt6/qml/org/kde/kquickimageeditor/kquickimageeditorplugin.qmltypes
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/kquickimageeditor/libkquickimageeditorplugin.so
-%{_libdir}/qt6/qml/org/kde/kquickimageeditor/qmldir
+%{_libdir}/libKQuickImageEditor.so.*.*
+%ghost %{_libdir}/libKQuickImageEditor.so.1
+%{_libdir}/qt6/qml/org/kde/kquickimageeditor
 
 %files devel
 %defattr(644,root,root,755)
+%{_libdir}/libKQuickImageEditor.so
 %{_libdir}/cmake/KQuickImageEditor
 %{_libdir}/qt6/mkspecs/modules/qt_KQuickImageEditor.pri
+%{_includedir}/KQuickImageEditor
+%{_includedir}/kquickimageeditor
